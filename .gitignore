@@ -1,1 +1,4 @@
 /build/
+
+# Database configuration
+src/main/resources/db.properties
