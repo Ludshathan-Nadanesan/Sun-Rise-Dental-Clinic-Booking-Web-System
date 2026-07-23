@@ -2,23 +2,29 @@ package com.sunrise.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DBConnection {
 	
-	private static Connection connection;
-	
-	public static Connection getConnection() throws Exception{
-		Class.forName(
+	public static Connection getConnection() throws SQLException{
+		try {
+			
+			Class.forName(
 				DBConfig.get("db.driver")
-				);
-		
-		connection = DriverManager.getConnection(
+			);
+			
+			return DriverManager.getConnection(
 				DBConfig.get("db.url"),
 				DBConfig.get("db.username"),
 				DBConfig.get("db.password")
-				);
+			);
 		
-		return connection;
+		} catch (Exception e) {
+			throw new SQLException(
+			"Database connection failed"
+			);
+		}
+		
 	}
 
 }
