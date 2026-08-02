@@ -290,7 +290,7 @@ Receptionists
 
 
 
-<a href="#"
+<a href="${pageContext.request.contextPath}/admin/dentists"
 
 class="<%= uri.contains("/admin/dentists") ? activeClass : normalClass %>">
 
@@ -302,7 +302,7 @@ Dentists
 
 
 
-<a href="#"
+<a href="${pageContext.request.contextPath}/admin/treatments"
 
 class="<%= uri.contains("/admin/treatments") ? activeClass : normalClass %>">
 
