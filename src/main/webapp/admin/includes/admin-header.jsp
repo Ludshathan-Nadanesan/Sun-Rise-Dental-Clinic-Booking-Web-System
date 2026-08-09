@@ -32,14 +32,17 @@ px-8 py-5
 
 
 <div class="
-w-12 h-12
+w-15 h-15
 rounded-xl
-bg-emerald-100 dark:bg-emerald-900/40
 flex items-center justify-center
-text-2xl
+overflow-hidden
 ">
 
-🦷
+    <img
+        src="${pageContext.request.contextPath}/logo/logo-light.png"
+        alt="Sunrise Dental Clinic Logo"
+        class="w-full h-full object-contain"
+    >
 
 </div>
 

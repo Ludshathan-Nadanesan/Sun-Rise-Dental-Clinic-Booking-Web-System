@@ -240,18 +240,30 @@ transition-colors duration-300
 
             <button type="submit"
             class="
-				bg-emerald-500
-				hover:bg-emerald-600
-				
-				text-white
-				
-				px-7 py-3
-				
-				rounded-xl
-				
-				font-medium
-				
-				transition
+				px-6
+py-3
+
+
+rounded-xl
+
+
+bg-gray-800
+
+dark:bg-gray-600
+
+
+hover:bg-gray-900
+
+dark:hover:bg-gray-700
+
+
+text-white
+
+
+font-medium
+
+
+transition
 				">
 
 
@@ -430,7 +442,19 @@ if(user.getStatus().equalsIgnoreCase("active")){
 %>
 
 
-                            <span class="bg-green-100
+                            <span class="
+                            
+                            	px-3
+
+								py-1
+								
+								rounded-full
+								
+								text-sm
+								
+								font-medium
+								                            	
+                            	bg-green-100
 								dark:bg-green-900/40
 								
 								text-green-700
@@ -450,7 +474,20 @@ else{
 
 
 
-                            <span class="bg-red-100
+                            <span class="
+                            
+
+                            	px-3
+
+								py-1
+								
+								rounded-full
+								
+								text-sm
+								
+								font-medium
+
+                            	bg-red-100
 								dark:bg-red-900/40
 								
 								text-red-700
