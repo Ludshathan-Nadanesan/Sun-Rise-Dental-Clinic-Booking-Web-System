@@ -599,8 +599,7 @@ text-2xl
 <h2 class="
 text-xl
 font-bold
-mt-5
-mb-2
+my-5
 text-gray-800
 dark:text-white
 ">
@@ -688,7 +687,9 @@ cursor-pointer
 
 
 <!--  Register Patient  -->
-<div class="
+<a 
+href="#"
+class="
 relative
 rounded-2xl
 p-[1px]
@@ -751,7 +752,7 @@ cursor-pointer
 
     </div>
 
-</div>
+</a>
 
 
 

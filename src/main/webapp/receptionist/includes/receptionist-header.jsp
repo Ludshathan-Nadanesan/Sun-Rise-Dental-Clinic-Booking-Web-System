@@ -281,11 +281,11 @@ Dashboard
 
 
 
-<a href="${pageContext.request.contextPath}/admin/receptionists"
+<a href="${pageContext.request.contextPath}/receptionist/patients"
 
-class="<%= uri.contains("/admin/receptionists/list.jsp") ? activeClass : normalClass %>">
+class="<%= uri.contains("/receptionist/patients/list.jsp") ? activeClass : normalClass %>">
 
-Receptionists
+Patients
 
 </a>
 
