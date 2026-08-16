@@ -39,7 +39,8 @@ public class DentistTreatmentDAO {
         		" dt.treatment_id, " +
         		" dt.dent_commision_perc, " +
         		" t.treatment_name, " +
-        		" t.default_fee " +
+        		" t.default_fee, " + 
+        		" t.estimated_duration " +
 
         		"FROM dentist_treatments dt " +
 
@@ -55,7 +56,7 @@ public class DentistTreatmentDAO {
         	    PreparedStatement ps = con.prepareStatement(sql)) {
 
 
-        	System.out.println("Searching dentist = " + dentistId);
+//        	System.out.println("Searching dentist = " + dentistId);
 
         	
         	    ps.setInt(1, dentistId);
@@ -103,6 +104,7 @@ public class DentistTreatmentDAO {
                             rs.getDouble("default_fee")
                     );
 
+                    dt.setEstimatedDuration(rs.getInt("estimated_duration"));
 
 
                     // Calculate dentist earning

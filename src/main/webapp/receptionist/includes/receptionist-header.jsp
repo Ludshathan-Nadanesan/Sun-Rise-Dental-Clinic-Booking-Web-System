@@ -291,6 +291,13 @@ Patients
 
 
 
+<a href="${pageContext.request.contextPath}/receptionist/appointments"
+
+class="<%= uri.contains("/admin/appointments") ? activeClass : normalClass %>">
+
+Appointments
+
+</a>
 
 
 <a href="${pageContext.request.contextPath}/admin/dentists"
@@ -317,13 +324,6 @@ Treatments
 
 
 
-<a href="#"
-
-class="<%= uri.contains("/admin/appointments") ? activeClass : normalClass %>">
-
-Appointments
-
-</a>
 
 
 
