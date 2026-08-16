@@ -314,6 +314,13 @@ Treatments
 </a>
 
 
+<a href="${pageContext.request.contextPath}/admin/taxes"
+
+class="<%= uri.contains("/admin/taxes") ? activeClass : normalClass %>">
+
+Taxes
+
+</a>
 
 
 
