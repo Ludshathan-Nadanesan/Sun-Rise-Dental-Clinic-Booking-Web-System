@@ -34,7 +34,7 @@ public class ReceptionistDashboardDAO {
         String appointmentSQL =
                 "SELECT COUNT(*) FROM appointments "
                 +
-                "WHERE DATE(appointment_date_time)=CURDATE()";
+                "WHERE DATE(start_date_time)=CURDATE()";
 
 
 

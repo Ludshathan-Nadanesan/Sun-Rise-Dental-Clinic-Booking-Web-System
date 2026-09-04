@@ -120,6 +120,13 @@ public class ReceptionistAppointmentsServlet extends HttpServlet {
                 long durationInMillis = estimatedDurationMinutes * 60 * 1000L;
                 Timestamp endDateTime = new Timestamp(startDateTime.getTime() + durationInMillis);
                 
+                // Check if patient already has an appointment overlapping with this time
+                if (appointmentDAO.hasPatientOverlap(patientId, startDateTime, endDateTime)) {
+                    setMessage(request, "This patient already has another appointment booked during this time.", "error");
+                    response.sendRedirect(request.getContextPath() + "/receptionist/appointments?action=add");
+                    return;
+                }
+                
                 // Create Appointment Object with BOTH start_date_time and end_date_time
                 Appointment appointment = new Appointment(0, patientId, dentistId, startDateTime, endDateTime, "scheduled", null, null);
                 appointment.setTreatmentId(treatmentId);
@@ -139,11 +146,36 @@ public class ReceptionistAppointmentsServlet extends HttpServlet {
                 e.printStackTrace();
                 setMessage(request, "Invalid date/time format.", "error");
                 response.sendRedirect(request.getContextPath() + "/receptionist/appointments?action=add");
-            } catch (Exception e) {
+                        } catch (Exception e) {
                 e.printStackTrace();
                 setMessage(request, "An unexpected error occurred. Please verify inputs.", "error");
                 response.sendRedirect(request.getContextPath() + "/receptionist/appointments?action=add");
             }
+            return;
+        }
+
+        // ==========================================
+        // Update Appointment
+        // ==========================================
+        else if ("update".equals(action)) {
+            String appointmentIdStr = request.getParameter("appointmentId");
+            String status = request.getParameter("status");
+
+            if (appointmentIdStr == null || appointmentIdStr.trim().isEmpty() || status == null) {
+                setMessage(request, "All fields are required.", "error");
+                redirectBack(request, response);
+                return;
+            }
+
+            int appointmentId = Integer.parseInt(appointmentIdStr);
+            boolean success = appointmentDAO.updateAppointmentStatus(appointmentId, status);
+
+            if (success) {
+                setMessage(request, "Appointment updated successfully.", "success");
+            } else {
+                setMessage(request, "Failed to update appointment.", "error");
+            }
+            redirectBack(request, response);
             return;
         }
 
@@ -163,5 +195,6 @@ public class ReceptionistAppointmentsServlet extends HttpServlet {
         request.getSession().setAttribute("messageType", type);
     }
 }
+
 
 

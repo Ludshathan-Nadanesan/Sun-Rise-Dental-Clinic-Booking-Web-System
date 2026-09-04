@@ -20,13 +20,13 @@ public class AppointmentDAO {
         List<Appointment> appointments = new ArrayList<>();
 
         String sql = 
-            "SELECT a.appointment_id, a.treatment_id, a.patient_id, a.dentist_id, a.start_date_time, a.end_date_time, a.status, a.is_paid, a.created_at, a.updated_at, a.perfomed_at, " + 
+            "SELECT a.appointment_id, a.treatment_id, a.patient_id, a.dentist_id, a.start_date_time, a.end_date_time, a.status, a.created_at, a.updated_at, a.perfomed_at, " + 
             "p.full_name AS patient_name, d.full_name AS dentist_name, tr.treatment_name AS treatment_name " +
             "FROM appointments a " +
             "JOIN patients p ON a.patient_id = p.patient_id " +
             "JOIN dentists d ON a.dentist_id = d.dentist_id "+
             "JOIN treatments tr ON a.treatment_id = tr.treatment_id " +
-            "ORDER BY a.appointment_date_time DESC";
+            "ORDER BY a.start_date_time DESC";
 
         try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -42,7 +42,6 @@ public class AppointmentDAO {
                 appointment.setAppointmentStartDateTime(rs.getTimestamp("start_date_time"));
                 appointment.setAppointmentEndDateTime(rs.getTimestamp("end_date_time"));
                 appointment.setStatus(rs.getString("status"));
-                appointment.setIsPaid(rs.getString("is_paid"));
                 appointment.setCreatedAt(rs.getTimestamp("created_at"));
                 appointment.setUpdatedAt(rs.getTimestamp("updated_at"));
                 appointment.setPerfomedAt(rs.getTimestamp("perfomed_at"));
@@ -91,19 +90,47 @@ public class AppointmentDAO {
     }
 
     // =====================================================
+    // Check Patient Overlap
+    // =====================================================
+
+    public boolean hasPatientOverlap(int patientId, java.sql.Timestamp startDateTime, java.sql.Timestamp endDateTime) {
+        boolean overlap = false;
+        
+        String sql = "SELECT COUNT(*) FROM appointments WHERE patient_id = ? AND status != 'cancelled' AND start_date_time < ? AND end_date_time > ?";
+        
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+             
+            ps.setInt(1, patientId);
+            ps.setTimestamp(2, endDateTime);
+            ps.setTimestamp(3, startDateTime);
+            
+            ResultSet rs = ps.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                overlap = true;
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return overlap;
+    }
+
+    // =====================================================
     // Update Appointment Status
     // =====================================================
 
-    public boolean updateAppointmentStatus(int appointmentId, String status, String isPaid) {
+        public boolean updateAppointmentStatus(int appointmentId, String status) {
         boolean result = false;
 
-        String sql = "UPDATE appointments SET status=?, is_paid=? WHERE appointment_id=?";
+        String sql = "UPDATE appointments SET status=?, perfomed_at = CASE WHEN ? = 'completed' AND perfomed_at IS NULL THEN CURRENT_TIMESTAMP ELSE perfomed_at END WHERE appointment_id=?";
 
         try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, status);
-            ps.setString(2, isPaid);
+            ps.setString(2, status);
             ps.setInt(3, appointmentId);
 
             int rows = ps.executeUpdate();
@@ -126,7 +153,7 @@ public class AppointmentDAO {
         Appointment appointment = null;
 
         String sql = 
-            "SELECT a.appointment_id, a.treatment_id, a.patient_id, a.dentist_id, a.start_date_time, a.end_date_time, a.status, a.is_paid, a.created_at, a.updated_at, a.perfomed_at, " +
+            "SELECT a.appointment_id, a.treatment_id, a.patient_id, a.dentist_id, a.start_date_time, a.end_date_time, a.status, a.created_at, a.updated_at, a.perfomed_at, " +
             "p.full_name AS patient_name, d.full_name AS dentist_name, tr.treatment_name AS treatment_name " +
             "FROM appointments a " +
             "JOIN patients p ON a.patient_id = p.patient_id " +
@@ -150,7 +177,6 @@ public class AppointmentDAO {
                 appointment.setAppointmentStartDateTime(rs.getTimestamp("start_date_time"));
                 appointment.setAppointmentEndDateTime(rs.getTimestamp("end_date_time"));
                 appointment.setStatus(rs.getString("status"));
-                appointment.setIsPaid(rs.getString("is_paid"));
                 appointment.setCreatedAt(rs.getTimestamp("created_at"));
                 appointment.setUpdatedAt(rs.getTimestamp("updated_at"));
                 appointment.setPerfomedAt(rs.getTimestamp("perfomed_at"));
@@ -199,7 +225,7 @@ public class AppointmentDAO {
         }
 
         StringBuilder sql = new StringBuilder(
-            "SELECT a.appointment_id, a.treatment_id, a.patient_id, a.dentist_id, a.start_date_time, a.end_date_time, a.status, a.is_paid, a.created_at, a.updated_at, a.perfomed_at, " +
+            "SELECT a.appointment_id, a.treatment_id, a.patient_id, a.dentist_id, a.start_date_time, a.end_date_time, a.status, a.created_at, a.updated_at, a.perfomed_at, " +
             "p.full_name AS patient_name, p.email AS patient_email, p.phone AS patient_phone, d.full_name AS dentist_name, tr.treatment_name AS treatment_name " +
             "FROM appointments a " +
             "JOIN patients p ON a.patient_id = p.patient_id " +
@@ -259,7 +285,6 @@ public class AppointmentDAO {
                 appointment.setAppointmentStartDateTime(rs.getTimestamp("start_date_time"));
                 appointment.setAppointmentEndDateTime(rs.getTimestamp("end_date_time"));
                 appointment.setStatus(rs.getString("status"));
-                appointment.setIsPaid(rs.getString("is_paid"));
                 appointment.setCreatedAt(rs.getTimestamp("created_at"));
                 appointment.setUpdatedAt(rs.getTimestamp("updated_at"));
                 appointment.setPerfomedAt(rs.getTimestamp("perfomed_at"));
@@ -278,7 +303,7 @@ public class AppointmentDAO {
 
     public List<Appointment> getAppointmentsByDentistAndDate(int dentistId, String date) {
         List<Appointment> appointments = new ArrayList<>();
-        String sql = "SELECT a.appointment_id, a.patient_id, a.treatment_id, a.dentist_id, a.start_date_time, a.end_date_time, a.status, a.is_paid, a.created_at, a.updated_at, a.perfomed_at FROM appointments a WHERE a.dentist_id = ? AND DATE(a.start_date_time) = ? AND a.status != 'cancelled' ORDER BY a.start_date_time ASC";
+        String sql = "SELECT a.appointment_id, a.patient_id, a.treatment_id, a.dentist_id, a.start_date_time, a.end_date_time, a.status, a.created_at, a.updated_at, a.perfomed_at FROM appointments a WHERE a.dentist_id = ? AND DATE(a.start_date_time) = ? AND a.status != 'cancelled' ORDER BY a.start_date_time ASC";
         try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, dentistId);
             ps.setString(2, date);
@@ -292,7 +317,6 @@ public class AppointmentDAO {
                 appointment.setAppointmentStartDateTime(rs.getTimestamp("start_date_time"));
                 appointment.setAppointmentEndDateTime(rs.getTimestamp("end_date_time"));
                 appointment.setStatus(rs.getString("status"));
-                appointment.setIsPaid(rs.getString("is_paid"));
                 appointment.setCreatedAt(rs.getTimestamp("created_at"));
                 appointment.setPerfomedAt(rs.getTimestamp("perfomed_at"));
                 appointment.setUpdatedAt(rs.getTimestamp("updated_at"));
@@ -304,6 +328,8 @@ public class AppointmentDAO {
         return appointments;
     }
 }
+
+
 
 
 

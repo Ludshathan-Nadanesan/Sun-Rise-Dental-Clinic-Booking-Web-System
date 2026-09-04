@@ -1,60 +1,63 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 
-<!DOCTYPE html>
-<html>
+    <!DOCTYPE html>
+    <html>
 
-<head>
+    <head>
 
-<meta charset="UTF-8">
+        <meta charset="UTF-8">
 
-<title><%= session.getAttribute("full_name") %> - Receptionist Dashboard</title>
+        <title>
+            <%= session.getAttribute("full_name") %> - Receptionist Dashboard
+        </title>
 
 
-<style type="text/tailwindcss">
+        <style type="text/tailwindcss">
 
-@custom-variant dark (&:where(.dark, .dark *));
+            @custom-variant dark (&:where(.dark, .dark *));
 
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css"
+            integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
-</head>
-
-
-
-<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-
-
-
-<!-- Theme + Header -->
-
-<%@ include file="../../utils/theme.jsp" %>
-
-<%@ include file="includes/receptionist-header.jsp" %>
+    </head>
 
 
 
+    <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
 
-<main class="p-8">
+
+
+        <!-- Theme + Header -->
+
+        <%@ include file="../../utils/theme.jsp" %>
+
+            <%@ include file="includes/receptionist-header.jsp" %>
 
 
 
 
-
-<!-- Page Header -->
-
-
-<div class="mb-10">
+                <main class="p-8">
 
 
-<h2 class="
+
+
+
+                    <!-- Page Header -->
+
+
+                    <div class="mb-10">
+
+
+                        <h2 class="
 text-3xl
 font-bold
 
@@ -62,36 +65,36 @@ text-gray-800
 dark:text-white
 ">
 
-Dashboard Overview
+                            Dashboard Overview
 
-</h2>
+                        </h2>
 
 
 
-<p class="
+                        <p class="
 mt-2
 
 text-gray-500
 dark:text-gray-400
 ">
 
-Monitor appoinments and patients.
+                            Monitor appoinments and patients.
 
-</p>
-
-
-</div>
+                        </p>
 
 
+                    </div>
 
 
 
 
 
-<!-- Dashboard Cards -->
 
 
-<div class="
+                    <!-- Dashboard Cards -->
+
+
+                    <div class="
 grid
 grid-cols-1
 sm:grid-cols-2
@@ -106,10 +109,10 @@ gap-6
 
 
 
-<!-- Patients -->
+                        <!-- Patients -->
 
 
-<div class="
+                        <div class="
 group
 
 bg-white
@@ -132,17 +135,17 @@ transition
 ">
 
 
-<div class="
+                            <div class="
 flex
 items-center
 justify-between
 ">
 
 
-<div>
+                                <div>
 
 
-<p class="
+                                    <p class="
 text-sm
 font-medium
 
@@ -150,13 +153,13 @@ text-gray-500
 dark:text-gray-400
 ">
 
-Total Patients
+                                        Total Patients
 
-</p>
+                                    </p>
 
 
 
-<h3 class="
+                                    <h3 class="
 mt-3
 
 text-3xl
@@ -166,16 +169,16 @@ text-gray-800
 dark:text-white
 ">
 
-${stats.totalPatients}
+                                        ${stats.totalPatients}
 
-</h3>
-
-
-</div>
+                                    </h3>
 
 
+                                </div>
 
-<div class="
+
+
+                                <div class="
 w-12
 h-12
 
@@ -191,17 +194,15 @@ justify-center
 text-2xl
 ">
 
-🧑‍⚕️
+                                    🧑‍⚕️
 
-</div>
-
-
-</div>
+                                </div>
 
 
-</div>
+                            </div>
 
 
+                        </div>
 
 
 
@@ -209,10 +210,12 @@ text-2xl
 
 
 
-<!-- Appointments -->
 
 
-<div class="
+                        <!-- Appointments -->
+
+
+                        <div class="
 bg-white
 dark:bg-gray-800
 
@@ -232,13 +235,13 @@ transition
 ">
 
 
-<div class="flex items-center justify-between">
+                            <div class="flex items-center justify-between">
 
 
-<div>
+                                <div>
 
 
-<p class="
+                                    <p class="
 text-sm
 font-medium
 
@@ -246,13 +249,13 @@ text-gray-500
 dark:text-gray-400
 ">
 
-Today's Appointments
+                                        Today's Appointments
 
-</p>
+                                    </p>
 
 
 
-<h3 class="
+                                    <h3 class="
 mt-3
 
 text-3xl
@@ -262,16 +265,16 @@ text-gray-800
 dark:text-white
 ">
 
-${stats.todayAppointments}
+                                        ${stats.todayAppointments}
 
-</h3>
-
-
-</div>
+                                    </h3>
 
 
+                                </div>
 
-<div class="
+
+
+                                <div class="
 w-12
 h-12
 rounded-xl
@@ -286,17 +289,15 @@ justify-center
 text-2xl
 ">
 
-📅
+                                    📅
 
-</div>
-
-
-</div>
+                                </div>
 
 
-</div>
+                            </div>
 
 
+                        </div>
 
 
 
@@ -304,10 +305,12 @@ text-2xl
 
 
 
-<!-- Dentists -->
 
 
-<div class="
+                        <!-- Dentists -->
+
+
+                        <div class="
 bg-white
 dark:bg-gray-800
 
@@ -327,13 +330,13 @@ transition
 ">
 
 
-<div class="flex items-center justify-between">
+                            <div class="flex items-center justify-between">
 
 
-<div>
+                                <div>
 
 
-<p class="
+                                    <p class="
 text-sm
 font-medium
 
@@ -341,12 +344,12 @@ text-gray-500
 dark:text-gray-400
 ">
 
-Active Dentists
+                                        Active Dentists
 
-</p>
+                                    </p>
 
 
-<h3 class="
+                                    <h3 class="
 mt-3
 
 text-3xl
@@ -356,15 +359,15 @@ text-gray-800
 dark:text-white
 ">
 
-${stats.activeDentists}
+                                        ${stats.activeDentists}
 
-</h3>
-
-
-</div>
+                                    </h3>
 
 
-<div class="
+                                </div>
+
+
+                                <div class="
 w-12
 h-12
 
@@ -380,17 +383,15 @@ justify-center
 text-2xl
 ">
 
-🦷
+                                    🦷
 
-</div>
-
-
-</div>
+                                </div>
 
 
-</div>
+                            </div>
 
 
+                        </div>
 
 
 
@@ -398,10 +399,12 @@ text-2xl
 
 
 
-<!-- Treatments -->
 
 
-<div class="
+                        <!-- Treatments -->
+
+
+                        <div class="
 bg-white
 dark:bg-gray-800
 
@@ -421,13 +424,13 @@ transition
 ">
 
 
-<div class="flex items-center justify-between">
+                            <div class="flex items-center justify-between">
 
 
-<div>
+                                <div>
 
 
-<p class="
+                                    <p class="
 text-sm
 font-medium
 
@@ -435,13 +438,13 @@ text-gray-500
 dark:text-gray-400
 ">
 
-Treatment Types
+                                        Treatment Types
 
-</p>
+                                    </p>
 
 
 
-<h3 class="
+                                    <h3 class="
 mt-3
 
 text-3xl
@@ -451,16 +454,16 @@ text-gray-800
 dark:text-white
 ">
 
-${stats.totalTreatments}
+                                        ${stats.totalTreatments}
 
-</h3>
-
-
-</div>
+                                    </h3>
 
 
+                                </div>
 
-<div class="
+
+
+                                <div class="
 w-12
 h-12
 
@@ -476,17 +479,15 @@ justify-center
 text-2xl
 ">
 
-💉
+                                    💉
 
-</div>
-
-
-</div>
+                                </div>
 
 
-</div>
+                            </div>
 
 
+                        </div>
 
 
 
@@ -494,10 +495,12 @@ text-2xl
 
 
 
-<!-- Users -->
 
 
-<div class="
+                        <!-- Users -->
+
+
+                        <div class="
 bg-white
 dark:bg-gray-800
 
@@ -517,13 +520,13 @@ transition
 ">
 
 
-<div class="flex items-center justify-between">
+                            <div class="flex items-center justify-between">
 
 
-<div>
+                                <div>
 
 
-<p class="
+                                    <p class="
 text-sm
 font-medium
 
@@ -531,13 +534,13 @@ text-gray-500
 dark:text-gray-400
 ">
 
-Active Users
+                                        Active Users
 
-</p>
+                                    </p>
 
 
 
-<h3 class="
+                                    <h3 class="
 mt-3
 
 text-3xl
@@ -547,15 +550,15 @@ text-gray-800
 dark:text-white
 ">
 
-${stats.activeUsers}
+                                        ${stats.activeUsers}
 
-</h3>
-
-
-</div>
+                                    </h3>
 
 
-<div class="
+                                </div>
+
+
+                                <div class="
 w-12
 h-12
 
@@ -571,32 +574,32 @@ justify-center
 text-2xl
 ">
 
-👥
+                                    👥
 
-</div>
-
-
-</div>
+                                </div>
 
 
-</div>
+                            </div>
 
 
+                        </div>
 
 
 
 
 
-</div>
+
+
+                    </div>
 
 
 
 
 
-<!--  Qucik Actions -->
+                    <!--  Qucik Actions -->
 
 
-<h2 class="
+                    <h2 class="
 text-xl
 font-bold
 my-5
@@ -604,21 +607,19 @@ text-gray-800
 dark:text-white
 ">
 
-Quick Actions
+                        Quick Actions
 
-</h2>
+                    </h2>
 
-<div class="grid
+                    <div class="grid
 grid-cols-1
 sm:grid-cols-2
 xl:grid-cols-5
 gap-6">
 
 
-<!--  New Appointments  -->
-<a 
-href="#"
-class="
+                        <!--  New Appointments  -->
+                        <a href="${pageContext.request.contextPath}/receptionist/appointments/book.jsp" class="
 relative
 rounded-2xl
 p-[1px]
@@ -637,7 +638,7 @@ group
 cursor-pointer
 ">
 
-    <div class="
+                            <div class="
     bg-white
     dark:bg-gray-800
 
@@ -661,35 +662,33 @@ cursor-pointer
     text-center
     ">
 
-        <p class="
+                                <p class="
         text-gray-500
         dark:text-gray-400
         ">
-            New Appointment
-        </p>
+                                    New Appointment
+                                </p>
 
-        <h3 class="
+                                <h3 class="
         text-3xl
         font-bold
         text-gray-800
         dark:text-white
         mt-2
         ">
-            +
-            
-        </h3>
+                                    +
 
-    </div>
+                                </h3>
 
-</a>
+                            </div>
 
-
+                        </a>
 
 
-<!--  Register Patient  -->
-<a 
-href="#"
-class="
+
+
+                        <!--  Register Patient  -->
+                        <a href="${pageContext.request.contextPath}/receptionist/patients/register.jsp" class="
 relative
 rounded-2xl
 p-[1px]
@@ -708,7 +707,7 @@ group
 cursor-pointer
 ">
 
-    <div class="
+                            <div class="
     bg-white
     dark:bg-gray-800
 
@@ -732,32 +731,32 @@ cursor-pointer
     text-center
     ">
 
-        <p class="
+                                <p class="
         text-gray-500
         dark:text-gray-400
         ">
-            Register Patient
-        </p>
+                                    Register Patient
+                                </p>
 
-        <h3 class="
+                                <h3 class="
         text-3xl
         font-bold
         text-gray-800
         dark:text-white
         mt-2
         ">
-            <i class="fa-solid fa-clipboard-user"></i>
-            
-        </h3>
+                                    <i class="fa-solid fa-clipboard-user"></i>
 
-    </div>
+                                </h3>
 
-</a>
+                            </div>
+
+                        </a>
 
 
 
-<!--  Find Patient  -->
-<div class="
+                        <!--  Find Patient  -->
+                        <a href="${pageContext.request.contextPath}/receptionist/patients/list.jsp" class="
 relative
 rounded-2xl
 p-[1px]
@@ -776,7 +775,7 @@ group
 cursor-pointer
 ">
 
-    <div class="
+                            <div class="
     bg-white
     dark:bg-gray-800
 
@@ -800,32 +799,32 @@ cursor-pointer
     text-center
     ">
 
-        <p class="
+                                <p class="
         text-gray-500
         dark:text-gray-400
         ">
-            Find Patient
-        </p>
+                                    Find Patient
+                                </p>
 
-        <h3 class="
+                                <h3 class="
         text-3xl
         font-bold
         text-gray-800
         dark:text-white
         mt-2
         ">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            
-        </h3>
+                                    <i class="fa-solid fa-magnifying-glass"></i>
 
-    </div>
+                                </h3>
 
-</div>
+                            </div>
+
+                        </a>
 
 
 
-<!--  View  Appointments -->
-<div class="
+                        <!--  View  Appointments -->
+                        <a href="${pageContext.request.contextPath}/receptionist/appointments/list.jsp" class="
 relative
 rounded-2xl
 p-[1px]
@@ -844,7 +843,7 @@ group
 cursor-pointer
 ">
 
-    <div class="
+                            <div class="
     bg-white
     dark:bg-gray-800
 
@@ -868,32 +867,32 @@ cursor-pointer
     text-center
     ">
 
-        <p class="
+                                <p class="
         text-gray-500
         dark:text-gray-400
         ">
-            View Appointment
-        </p>
+                                    View Appointment
+                                </p>
 
-        <h3 class="
+                                <h3 class="
         text-3xl
         font-bold
         text-gray-800
         dark:text-white
         mt-2
         ">
-            <i class="fa-solid fa-calendar-days"></i>
-            
-        </h3>
+                                    <i class="fa-solid fa-calendar-days"></i>
 
-    </div>
+                                </h3>
 
-</div>
+                            </div>
+
+                        </a>
 
 
 
-<!--  View  Appointments -->
-<div class="
+                        <!--  View  Bills -->
+                        <a href="${pageContext.request.contextPath}/receptionist/billing/list.jsp" class="
 relative
 rounded-2xl
 p-[1px]
@@ -912,7 +911,7 @@ group
 cursor-pointer
 ">
 
-    <div class="
+                            <div class="
     bg-white
     dark:bg-gray-800
 
@@ -936,91 +935,39 @@ cursor-pointer
     text-center
     ">
 
-        <p class="
+                                <p class="
         text-gray-500
         dark:text-gray-400
         ">
-            View Bills
-        </p>
+                                    View Bills
+                                </p>
 
-        <h3 class="
+                                <h3 class="
         text-3xl
         font-bold
         text-gray-800
         dark:text-white
         mt-2
         ">
-            
-            <i class="fa-solid fa-file-invoice-dollar"></i>
-            
-        </h3>
 
-    </div>
+                                    <i class="fa-solid fa-file-invoice-dollar"></i>
 
-</div>
+                                </h3>
 
+                            </div>
 
-
-</div>
+                        </a>
 
 
 
-<!-- Future Activity Section -->
-
-
-<div class="
-mt-10
-
-bg-white
-dark:bg-gray-800
-
-rounded-2xl
-
-shadow-md
-
-border
-border-gray-100
-dark:border-gray-700
-
-p-6
-">
-
-
-<h3 class="
-text-xl
-font-bold
-
-text-gray-800
-dark:text-white
-">
-
-Recent Clinic Activity
-
-</h3>
-
-
-<p class="
-mt-2
-
-text-gray-500
-dark:text-gray-400
-">
-
-Upcoming appointments, treatments and system activities will appear here.
-
-</p>
+                    </div>
 
 
 
-</div>
+                </main>
 
 
 
+    </body>
 
-</main>
-
-
-
-</body>
-
-</html>
+    </html>

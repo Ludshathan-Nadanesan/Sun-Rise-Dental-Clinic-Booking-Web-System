@@ -293,69 +293,25 @@ Patients
 
 <a href="${pageContext.request.contextPath}/receptionist/appointments"
 
-class="<%= uri.contains("/admin/appointments") ? activeClass : normalClass %>">
+class="<%= uri.contains("/receptionist/appointments") ? activeClass : normalClass %>">
 
 Appointments
 
 </a>
 
 
-<a href="${pageContext.request.contextPath}/admin/dentists"
+<a href="${pageContext.request.contextPath}/receptionist/billing/list.jsp"
 
-class="<%= uri.contains("/admin/dentists") ? activeClass : normalClass %>">
+class="<%= uri.contains("/receptionist/billing/") ? activeClass : normalClass %>">
 
-Dentists
-
-</a>
-
-
-
-
-
-<a href="${pageContext.request.contextPath}/admin/treatments"
-
-class="<%= uri.contains("/admin/treatments") ? activeClass : normalClass %>">
-
-Treatments
+Billing
 
 </a>
 
 
+<a href="${pageContext.request.contextPath}/receptionist/settings"
 
-
-
-
-
-
-
-
-<a href="#"
-
-class="<%= uri.contains("/admin/patients") ? activeClass : normalClass %>">
-
-Patients
-
-</a>
-
-
-
-
-
-<a href="#"
-
-class="<%= uri.contains("/admin/reports") ? activeClass : normalClass %>">
-
-Reports
-
-</a>
-
-
-
-
-
-<a href="#"
-
-class="<%= uri.contains("/admin/settings") ? activeClass : normalClass %>">
+class="<%= uri.contains("/receptionist/settings") ? activeClass : normalClass %>">
 
 Settings
 

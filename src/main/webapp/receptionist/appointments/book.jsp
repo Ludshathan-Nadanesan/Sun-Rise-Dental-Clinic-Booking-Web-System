@@ -53,28 +53,44 @@
 
                 <div class="grid grid-cols-1 gap-6">
 
-                    <!-- Select Patient -->
-                    <div>
+
+
+<!-- Select Patient (Searchable) -->
+                    <div class="relative">
                         <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                            Select Patient <span class="text-red-500">*</span>
+                            Search & Select Patient <span class="text-red-500">*</span>
                         </label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
-                                <i class="fa-regular fa-user"></i>
+                                <i class="fa-solid fa-search"></i>
                             </div>
-                            <select name="patientId" required class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-xl pl-11 pr-4 py-3 focus:ring-2 focus:ring-emerald-400 outline-none transition appearance-none">
-                                <option value="" disabled selected>-- Select a Patient --</option>
+                            <input type="text" id="patientSearchInput" placeholder="Search by name, email, or phone..." autocomplete="off" required
+                                class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-xl pl-11 pr-4 py-3 focus:ring-2 focus:ring-emerald-400 outline-none transition">
+                            <input type="hidden" name="patientId" id="patientIdHidden" required>
+                        </div>
+                        
+                        <!-- Dropdown list for results -->
+                        <div id="patientDropdown" class="absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg max-h-60 overflow-y-auto hidden">
+                            <ul id="patientList">
                                 <% List<Patient> patients = (List<Patient>) request.getAttribute("patients");
                                     if(patients != null) {
                                         for(Patient p : patients) {
                                 %>
-                                <option value="<%= p.getPatientId() %>">
-                                    <%= p.getFullName() %> (<%= p.getPhone() %>)
-                                </option>
+                                <li class="patient-item px-4 py-3 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 cursor-pointer text-gray-700 dark:text-gray-300 transition border-b border-gray-100 dark:border-gray-700 last:border-0"
+                                    data-id="<%= p.getPatientId() %>" 
+                                    data-name="<%= p.getFullName() != null ? p.getFullName().toLowerCase() : "" %>"
+                                    data-email="<%= p.getEmail() != null ? p.getEmail().toLowerCase() : "" %>"
+                                    data-phone="<%= p.getPhone() %>"
+                                    data-display="<%= p.getFullName() %> (<%= p.getPhone() %>)">
+                                    <div class="font-medium"><%= p.getFullName() %></div>
+                                    <div class="text-xs text-gray-500 dark:text-gray-400"><i class="fa-solid fa-phone text-[10px] mr-1"></i><%= p.getPhone() %> &nbsp;|&nbsp; <i class="fa-solid fa-envelope text-[10px] mr-1"></i><%= p.getEmail() != null ? p.getEmail() : "N/A" %></div>
+                                </li>
                                 <% } } %>
-                            </select>
+                                <li id="noPatientFound" class="px-4 py-3 text-gray-500 dark:text-gray-400 text-sm hidden">No patients found.</li>
+                            </ul>
                         </div>
                     </div>
+
 
                     <!-- Select Dentist -->
                     <div>
@@ -202,6 +218,76 @@
         const submitBtn = document.getElementById('submitBtn');
 
         let selectedTime = null;
+        
+        
+
+     // --- Patient Searchable Dropdown Logic ---
+             const patientSearchInput = document.getElementById('patientSearchInput');
+             const patientIdHidden = document.getElementById('patientIdHidden');
+             const patientDropdown = document.getElementById('patientDropdown');
+             const patientItems = document.querySelectorAll('.patient-item');
+             const noPatientFound = document.getElementById('noPatientFound');
+
+             patientSearchInput.addEventListener('focus', function() {
+                 patientDropdown.classList.remove('hidden');
+                 filterPatients();
+             });
+
+             document.addEventListener('click', function(e) {
+                 if (!patientSearchInput.contains(e.target) && !patientDropdown.contains(e.target)) {
+                     patientDropdown.classList.add('hidden');
+                 }
+             });
+
+             patientSearchInput.addEventListener('input', function() {
+                 patientIdHidden.value = ''; // Clear selected patient ID when typing
+                 filterPatients();
+             });
+
+             function filterPatients() {
+                 const searchTerm = patientSearchInput.value.toLowerCase().trim();
+                 let visibleCount = 0;
+
+                 patientItems.forEach(item => {
+                 	const name = (item.getAttribute('data-name') || '').toLowerCase();
+                     const email = (item.getAttribute('data-email') || '').toLowerCase();
+                     const phone = (item.getAttribute('data-phone') || '').toLowerCase();
+                     
+                     if (name.includes(searchTerm) || email.includes(searchTerm) || phone.includes(searchTerm)) {
+                         item.style.display = '';
+                     	item.classList.remove('hidden');
+                         visibleCount++;
+                     } else {
+                         item.style.display = 'none';
+                         item.classList.add('hidden');
+                     }
+                 });
+
+                 if (visibleCount === 0) {
+                     noPatientFound.style.display = '';
+                     noPatientFound.classList.remove('hidden');
+                 } else {
+                     noPatientFound.style.display = 'none';
+                     noPatientFound.classList.add('hidden');
+                 }
+             }
+
+             patientItems.forEach(item => {
+                 item.addEventListener('click', function() {
+                     const id = this.getAttribute('data-id');
+                     const display = this.getAttribute('data-display');
+                     
+                     patientIdHidden.value = id;
+                     patientSearchInput.value = display;
+                     
+                     patientDropdown.classList.add('hidden');
+                     
+                     // Clear the validation error if valid
+                     patientSearchInput.setCustomValidity("");
+                 });
+             });
+
+             
 
         // Fetch treatments when dentist changes
         dentistSelect.addEventListener('change', async function() {

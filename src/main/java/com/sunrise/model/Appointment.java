@@ -13,30 +13,24 @@ public class Appointment {
     private Timestamp appointmentEndDateTime;
     
     private String status;
-    private String isPaid;
     private Timestamp createdAt;
     private Timestamp updatedAt;
     private Timestamp perfomedAt;
 
-    
-    
     // Transient fields for displaying in UI
     private String patientName;
     private String dentistName;
     private String treatmentName;
     
-
     // =========================
     // Default Constructor
     // =========================
-
     public Appointment() {
     }
 
     // =========================
     // Parameterized Constructor
     // =========================
-
     public Appointment(int appointmentId, int patientId, int dentistId, Timestamp appointmentStartDateTime, Timestamp appointmentEndDateTime, String status, Timestamp createdAt, Timestamp updatedAt) {
         this.appointmentId = appointmentId;
         this.patientId = patientId;
@@ -84,8 +78,6 @@ public class Appointment {
         this.treatmentId = treatmentId;
     }
     
-    
-    
     public Timestamp getAppointmentStartDateTime() {
         return appointmentStartDateTime;
     }
@@ -94,7 +86,6 @@ public class Appointment {
         this.appointmentStartDateTime = appointmentStartDateTime;
     }
     
-    
     public Timestamp getAppointmentEndDateTime() {
         return appointmentEndDateTime;
     }
@@ -102,10 +93,6 @@ public class Appointment {
     public void setAppointmentEndDateTime(Timestamp appointmentEndDateTime) {
         this.appointmentEndDateTime = appointmentEndDateTime;
     }
-    
-    
-    
-    
 
     public String getStatus() {
         return status;
@@ -115,15 +102,6 @@ public class Appointment {
         this.status = status;
     }
     
-    public String getIsPaid() {
-        return isPaid;
-    }
-
-    public void setIsPaid(String isPaid) {
-        this.isPaid = isPaid;
-    }
-    
-
     public Timestamp getCreatedAt() {
         return createdAt;
     }
