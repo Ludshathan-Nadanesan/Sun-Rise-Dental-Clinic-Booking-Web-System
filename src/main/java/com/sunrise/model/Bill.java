@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class Bill {
     private int billId;
     private int patientId;
+    private String patientName;
     private double subTotal;
     private double taxPay;
     private double totalAmmount;
@@ -36,6 +37,9 @@ public class Bill {
 
     public int getPatientId() { return patientId; }
     public void setPatientId(int patientId) { this.patientId = patientId; }
+
+    public String getPatientName() { return patientName; }
+    public void setPatientName(String patientName) { this.patientName = patientName; }
 
     public double getSubTotal() { return subTotal; }
     public void setSubTotal(double subTotal) { this.subTotal = subTotal; }

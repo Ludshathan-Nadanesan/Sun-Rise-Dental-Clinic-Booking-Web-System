@@ -580,64 +580,6 @@ text-2xl
 
 
 
-
-
-
-
-</div>
-
-
-
-
-
-
-<!-- Future Activity Section -->
-
-
-<div class="
-mt-10
-
-bg-white
-dark:bg-gray-800
-
-rounded-2xl
-
-shadow-md
-
-border
-border-gray-100
-dark:border-gray-700
-
-p-6
-">
-
-
-<h3 class="
-text-xl
-font-bold
-
-text-gray-800
-dark:text-white
-">
-
-Recent Clinic Activity
-
-</h3>
-
-
-<p class="
-mt-2
-
-text-gray-500
-dark:text-gray-400
-">
-
-Upcoming appointments, treatments and system activities will appear here.
-
-</p>
-
-
-
 </div>
 
 

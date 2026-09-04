@@ -1,6 +1,7 @@
 <%@page import="com.sunrise.util.SessionUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ 
 
 
 <%
@@ -69,6 +70,9 @@ if(SessionUtil.isLoggedIn(request)){
 <title>Login</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css"
+            integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
@@ -143,6 +147,8 @@ d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
 <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
 
 
+
+
 <a href="#" 
 class="
 flex items-center mb-6
@@ -151,7 +157,8 @@ text-gray-900 dark:text-white
 tracking-wide
 ">
 
-🦷 SunRise Dental Clinic
+<img src="${pageContext.request.contextPath}/logo/logo-light.png" alt="SunRise Dental Clinic Logo" class="h-12 w-auto mr-3">
+SunRise Dental Clinic
 
 </a>
 
@@ -262,6 +269,7 @@ Password
 
 
 
+<div class="relative">
 <input 
 
 type="password"
@@ -292,6 +300,7 @@ focus:ring-emerald-400
 block w-full
 
 p-3
+pr-10
 
 transition
 
@@ -299,7 +308,10 @@ transition
 
 required>
 
-
+<button type="button" onclick="togglePassword('password', this)" class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-emerald-500 transition">
+    <i class="fa-regular fa-eye"></i>
+</button>
+</div>
 </div>
 
 
@@ -375,5 +387,20 @@ if (error != null) {
 
 
 
+<script>
+    function togglePassword(inputId, btnElement) {
+        const input = document.getElementById(inputId);
+        const icon = btnElement.querySelector('i');
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
+</script>
 </body>
 </html>

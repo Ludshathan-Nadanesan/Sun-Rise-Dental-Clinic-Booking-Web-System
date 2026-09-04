@@ -14,7 +14,7 @@
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300 min-h-screen">
     
     <%@ include file="../../utils/theme.jsp" %>
-    <%@ include file="../includes/receptionist-header.jsp" %>
+    <%@ include file="../includes/admin-header.jsp" %>
 
     <main class="p-8 max-w-6xl mx-auto">
         <div class="mb-8">
@@ -186,6 +186,44 @@
                         <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">
                             Choose how the dashboard looks to reduce eye strain.
                         </p>
+                    </div>
+                </div>
+
+                <!-- Backup & Export -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden mt-8">
+                    <div class="p-6 border-b border-gray-100 dark:border-gray-700">
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+                            <i class="fa-solid fa-download text-emerald-500"></i> Backup & Export
+                        </h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                            Export data to CSV for reporting
+                        </p>
+                        
+                        <a href="${pageContext.request.contextPath}/admin/export?type=patients" class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 text-gray-700 dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-xl transition cursor-pointer border border-gray-200 dark:border-gray-600">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-users text-lg"></i>
+                                <span class="font-medium">Export Patients (.csv)</span>
+                            </div>
+                            <i class="fa-solid fa-file-csv"></i>
+                        </a>
+                        
+                        <a href="${pageContext.request.contextPath}/admin/export?type=appointments" class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 text-gray-700 dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-xl transition cursor-pointer border border-gray-200 dark:border-gray-600">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-calendar-check text-lg"></i>
+                                <span class="font-medium">Export Appointments (.csv)</span>
+                            </div>
+                            <i class="fa-solid fa-file-csv"></i>
+                        </a>
+
+                        <a href="${pageContext.request.contextPath}/admin/export?type=bills" class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 text-gray-700 dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-xl transition cursor-pointer border border-gray-200 dark:border-gray-600">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-file-invoice-dollar text-lg"></i>
+                                <span class="font-medium">Export Bills (.csv)</span>
+                            </div>
+                            <i class="fa-solid fa-file-csv"></i>
+                        </a>
                     </div>
                 </div>
 

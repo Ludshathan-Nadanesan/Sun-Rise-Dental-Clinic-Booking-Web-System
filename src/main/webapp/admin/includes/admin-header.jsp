@@ -1,16 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%
-String uri = request.getRequestURI();
-
-String activeClass =
-"text-emerald-600 dark:text-emerald-400 font-semibold border-b-2 border-emerald-600 dark:border-emerald-400 pb-2";
-
-String normalClass =
-"text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition";
-%>
-<header class="
+    <% String uri=request.getRequestURI(); String
+        activeClass="text-emerald-600 dark:text-emerald-400 font-semibold border-b-2 border-emerald-600 dark:border-emerald-400 pb-2"
+        ; String
+        normalClass="text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition" ;
+        %>
+        <header class="
 bg-white dark:bg-gray-900
 shadow-lg
 border-b
@@ -19,83 +14,77 @@ transition-colors duration-300
 ">
 
 
-<div class="
+            <div class="
 flex items-center justify-between
 px-8 py-5
 ">
 
 
 
-<!-- Logo -->
+                <!-- Logo -->
 
-<div class="flex items-center gap-4">
+                <div class="flex items-center gap-4">
 
 
-<div class="
+                    <div class="
 w-15 h-15
 rounded-xl
 flex items-center justify-center
 overflow-hidden
 ">
 
-    <img
-        src="${pageContext.request.contextPath}/logo/logo-light.png"
-        alt="Sunrise Dental Clinic Logo"
-        class="w-full h-full object-contain"
-    >
+                        <img src="${pageContext.request.contextPath}/logo/logo-light.png"
+                            alt="Sunrise Dental Clinic Logo" class="w-full h-full object-contain">
 
-</div>
+                    </div>
 
 
 
-<div>
+                    <div>
 
-<h1 class="
+                        <h1 class="
 text-2xl
 font-bold
 text-emerald-600
 dark:text-emerald-400
 ">
 
-Sunrise Dental Clinic
+                            Sunrise Dental Clinic
 
-</h1>
+                        </h1>
 
 
-<p class="
+                        <p class="
 text-sm
 text-gray-500
 dark:text-gray-400
 ">
 
-Admin Dashboard
+                            Admin Dashboard
 
-</p>
-
-
-</div>
+                        </p>
 
 
-</div>
+                    </div>
 
 
+                </div>
 
 
 
-<!-- Right Section -->
 
 
-<div class="flex items-center gap-5">
+                <!-- Right Section -->
+
+
+                <div class="flex items-center gap-5">
 
 
 
-<!-- Theme Toggle -->
+                    <!-- Theme Toggle -->
 
 
-<button 
-onclick="toggleTheme()"
-
-class="
+                    <button onclick="toggleTheme()" class="
 w-10 h-10
 rounded-full
 
@@ -116,104 +105,88 @@ cursor-pointer
 ">
 
 
-<!-- Moon -->
+                        <!-- Moon -->
 
-<svg 
-class="
+                        <svg class="
 dark:hidden
 w-5 h-5
 text-gray-700
-"
-fill="none"
-viewBox="0 0 24 24"
-stroke="currentColor">
+" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 
 
-<path 
-stroke-linecap="round"
-stroke-linejoin="round"
-stroke-width="2"
-d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
 
 
-</svg>
+                        </svg>
 
 
 
-<!-- Sun -->
+                        <!-- Sun -->
 
 
-<svg 
-class="
+                        <svg class="
 hidden dark:block
 w-5 h-5
 text-yellow-400
-"
-fill="none"
-viewBox="0 0 24 24"
-stroke="currentColor">
+" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 
 
-<path 
-stroke-linecap="round"
-stroke-linejoin="round"
-stroke-width="2"
-d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364-.707.707M6.343 17.657l-.707.707m12.728 0-.707-.707M6.343 6.343l-.707-.707"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364-.707.707M6.343 17.657l-.707.707m12.728 0-.707-.707M6.343 6.343l-.707-.707" />
 
 
-</svg>
+                        </svg>
 
 
-</button>
+                    </button>
 
 
 
 
 
 
-<!-- Admin Info -->
+                    <!-- Admin Info -->
 
 
-<div class="text-right hidden sm:block">
+                    <div class="text-right hidden sm:block">
 
 
-<p class="
+                        <p class="
 font-semibold
 text-gray-800
 dark:text-white
 ">
 
-Welcome,
-<%= session.getAttribute("full_name") %>
+                            Welcome,
+                            <%= session.getAttribute("full_name") %>
 
-</p>
+                        </p>
 
 
-<p class="
+                        <p class="
 text-sm
 text-gray-500
 dark:text-gray-400
 capitalize
 ">
 
-<%= session.getAttribute("role") %>
+                            <%= session.getAttribute("role") %>
 
-</p>
-
-
-</div>
+                        </p>
 
 
+                    </div>
 
 
 
 
-<!-- Logout -->
 
 
-<a href="${pageContext.request.contextPath}/logout"
+                    <!-- Logout -->
 
-class="
+
+                    <a href="${pageContext.request.contextPath}/logout" class="
 px-5 py-2.5
 
 rounded-xl
@@ -232,25 +205,25 @@ transition
 
 ">
 
-Logout
+                        Logout
 
-</a>
-
-
-
-</div>
-
-
-</div>
+                    </a>
 
 
 
+                </div>
 
 
-<!-- Navigation -->
+            </div>
 
 
-<nav class="
+
+
+
+            <!-- Navigation -->
+
+
+            <nav class="
 border-t
 
 border-gray-200
@@ -263,7 +236,7 @@ overflow-x-auto
 ">
 
 
-<div class="
+                <div class="
 flex gap-7
 text-sm
 font-medium
@@ -271,108 +244,98 @@ whitespace-nowrap
 ">
 
 
-<a href="${pageContext.request.contextPath}/admin"
-class="<%= uri.contains("/admin/dashboard.jsp") ? activeClass : normalClass %>">
+                    <a href="${pageContext.request.contextPath}/admin" class="<%= uri.contains("/admin/dashboard.jsp") ? activeClass : normalClass %>">
 
-Dashboard
+                        Dashboard
 
-</a>
+                    </a>
 
 
 
 
-<a href="${pageContext.request.contextPath}/admin/receptionists"
+                    <a href="${pageContext.request.contextPath}/admin/receptionists" class="<%= uri.contains("/admin/receptionists/list.jsp") ? activeClass : normalClass %>">
 
-class="<%= uri.contains("/admin/receptionists/list.jsp") ? activeClass : normalClass %>">
+                        Receptionists
 
-Receptionists
+                    </a>
 
-</a>
 
 
 
 
+                    <a href="${pageContext.request.contextPath}/admin/dentists" class="<%= uri.contains("/admin/dentists") ? activeClass : normalClass %>">
 
-<a href="${pageContext.request.contextPath}/admin/dentists"
+                        Dentists
 
-class="<%= uri.contains("/admin/dentists") ? activeClass : normalClass %>">
+                    </a>
 
-Dentists
 
-</a>
 
 
 
+                    <a href="${pageContext.request.contextPath}/admin/treatments" class="<%= uri.contains("/admin/treatments") ? activeClass : normalClass %>">
 
+                        Treatments
 
-<a href="${pageContext.request.contextPath}/admin/treatments"
+                    </a>
 
-class="<%= uri.contains("/admin/treatments") ? activeClass : normalClass %>">
 
-Treatments
 
-</a>
 
 
-<a href="${pageContext.request.contextPath}/admin/taxes"
+                    <a href="${pageContext.request.contextPath}/admin/appointments" class="<%= uri.contains("/admin/appointments") ? activeClass : normalClass %>">
 
-class="<%= uri.contains("/admin/taxes") ? activeClass : normalClass %>">
+                        Appointments
 
-Taxes
+                    </a>
 
-</a>
 
 
 
-<a href="#"
 
-class="<%= uri.contains("/admin/appointments") ? activeClass : normalClass %>">
+                    <a href="${pageContext.request.contextPath}/admin/patients" class="<%= uri.contains("/admin/patients") ? activeClass : normalClass %>">
 
-Appointments
+                        Patients
 
-</a>
+                    </a>
 
 
 
 
+                    <a href="${pageContext.request.contextPath}/admin/bills" class="<%= uri.contains("/admin/bills") ? activeClass : normalClass %>">
 
-<a href="#"
+                        Billing
 
-class="<%= uri.contains("/admin/patients") ? activeClass : normalClass %>">
+                    </a>
 
-Patients
 
-</a>
 
+                    <a href="${pageContext.request.contextPath}/admin/taxes" class="<%= uri.contains("/admin/taxes") ? activeClass : normalClass %>">
 
+                        Taxes
 
+                    </a>
 
 
-<a href="#"
+                    <a href="${pageContext.request.contextPath}/admin/reports" class="<%= uri.contains("/admin/reports") ? activeClass : normalClass %>">
 
-class="<%= uri.contains("/admin/reports") ? activeClass : normalClass %>">
+                        Reports
 
-Reports
+                    </a>
 
-</a>
 
+                    <a href="${pageContext.request.contextPath}/admin/settings" class="<%= uri.contains("/admin/settings") ? activeClass : normalClass %>">
 
+                        Settings
 
+                    </a>
 
 
-<a href="#"
 
-class="<%= uri.contains("/admin/settings") ? activeClass : normalClass %>">
+                </div>
 
-Settings
 
-</a>
+            </nav>
 
 
-</div>
-
-
-</nav>
-
-
-</header>
+        </header>

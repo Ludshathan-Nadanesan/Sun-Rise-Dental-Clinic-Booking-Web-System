@@ -362,4 +362,61 @@ public class BillDAO {
             }
         }
     }
+
+    public List<Bill> searchBills(String keyword, String sortBy) throws SQLException {
+        List<Bill> bills = new ArrayList<>();
+        boolean isNumeric = keyword != null && keyword.matches("\\d+");
+        
+        String orderBy = "b.created_at DESC";
+        if ("oldest".equals(sortBy)) {
+            orderBy = "b.created_at ASC";
+        } else if ("newest".equals(sortBy)) {
+            orderBy = "b.created_at DESC";
+        }
+
+        String sql;
+        if (isNumeric) {
+            sql = "SELECT b.*, p.full_name AS patient_name " +
+                  "FROM bills b " +
+                  "JOIN patients p ON b.patient_id = p.patient_id " +
+                  "WHERE p.full_name LIKE ? OR b.bill_id = ? " +
+                  "ORDER BY " + orderBy;
+        } else {
+            sql = "SELECT b.*, p.full_name AS patient_name " +
+                  "FROM bills b " +
+                  "JOIN patients p ON b.patient_id = p.patient_id " +
+                  "WHERE p.full_name LIKE ? " +
+                  "ORDER BY " + orderBy;
+        }
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             
+            String likeQuery = "%" + (keyword == null ? "" : keyword) + "%";
+            pstmt.setString(1, likeQuery);
+            
+            if (isNumeric) {
+                pstmt.setInt(2, Integer.parseInt(keyword));
+            }
+            
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                Bill b = new Bill();
+                b.setBillId(rs.getInt("bill_id"));
+                b.setPatientId(rs.getInt("patient_id"));
+                b.setPatientName(rs.getString("patient_name")); // Assuming Bill model has setPatientName or we can set it if it exists. Wait, Bill model might not have patientName. Let me check model!
+                b.setSubTotal(rs.getDouble("sub_total"));
+                b.setTaxPay(rs.getDouble("tax_pay"));
+                b.setTotalAmmount(rs.getDouble("total_ammount"));
+                b.setPaidAmmount(rs.getDouble("paid_ammount"));
+                b.setBalanceAmmount(rs.getDouble("balance_ammount"));
+                b.setPaymentStatus(rs.getString("payment_status"));
+                b.setCreatedAt(rs.getTimestamp("created_at"));
+                b.setPaidAt(rs.getTimestamp("paid_at"));
+                bills.add(b);
+            }
+        }
+        return bills;
+    }
 }
