@@ -329,6 +329,10 @@ whitespace-nowrap
                         Settings
 
                     </a>
+                    
+                    <a href="${pageContext.request.contextPath}/admin/help" class="<%= uri.contains("/admin/help") ? activeClass : normalClass %>">
+                        Help Guide
+                    </a>
 
 
 

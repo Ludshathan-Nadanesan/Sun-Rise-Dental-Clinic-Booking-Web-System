@@ -318,6 +318,12 @@ Settings
 </a>
 
 
+<a href="${pageContext.request.contextPath}/receptionist/help"
+class="<%= uri.contains("/receptionist/help") ? activeClass : normalClass %>">
+Help Guide
+</a>
+
+
 </div>
 
 
